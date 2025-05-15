@@ -28,7 +28,7 @@ pub use zenoh::config as zenoh_config;
 use zenoh::internal::runtime::Runtime as ZRuntime;
 use zenoh::{bytes::ZBytes, pubsub::Subscriber, qos::Priority, Session};
 
-const UPROTOCOL_MAJOR_VERSION: u8 = 2;
+const UPROTOCOL_MAJOR_VERSION: u8 = 1;
 const THREAD_NUM: usize = 10;
 
 // Create a separate tokio Runtime for running the callback
