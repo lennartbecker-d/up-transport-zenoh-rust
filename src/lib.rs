@@ -239,7 +239,7 @@ impl UPTransportZenoh {
             )
             .into());
         }
-
+        info!("Attachment length: {}", attachment.len());
         let attachment_bytes = attachment.to_bytes();
         info!("Attachment bytes: {:?}", attachment_bytes);
         let ver = attachment_bytes[0];
