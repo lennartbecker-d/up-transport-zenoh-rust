@@ -14,7 +14,7 @@ use crate::{UPTransportZenoh, CB_RUNTIME};
 use async_trait::async_trait;
 use bytes::Bytes;
 use std::sync::Arc;
-use tracing::{error, warn};
+use tracing::{error, warn, info};
 use up_rust::{
     ComparableListener, UAttributes, UAttributesValidators, UCode, UListener, UMessage, UStatus,
     UTransport, UUri,
@@ -80,10 +80,14 @@ impl UPTransportZenoh {
                 warn!("Unable to get attachment");
                 return;
             };
+            info!("Attempting to transform the following attachment: {:?}", attachment);
             let u_attribute = match UPTransportZenoh::attachment_to_uattributes(attachment) {
-                Ok(uattributes) => uattributes,
+                Ok(uattributes) => {
+                    info!("Successfully transformed attachment to UAttributes.");
+                    uattributes
+                },
                 Err(e) => {
-                    warn!("Unable to transform attachement to UAttributes: {e:?}");
+                    warn!("Unable to transform attachment to UAttributes: {e:?}");
                     return;
                 }
             };
