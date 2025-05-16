@@ -20,8 +20,7 @@ use std::{
     sync::{Arc, LazyLock, Mutex},
 };
 use tokio::runtime::Runtime;
-// use tracing::error;
-use tracing::{error, info};
+use tracing::error;
 use up_rust::{ComparableListener, LocalUriProvider, UAttributes, UCode, UPriority, UStatus, UUri};
 // Re-export Zenoh config
 pub use zenoh::config as zenoh_config;
@@ -239,9 +238,8 @@ impl UPTransportZenoh {
             )
             .into());
         }
-        info!("Attachment length: {}", attachment.len());
+
         let attachment_bytes = attachment.to_bytes();
-        info!("Attachment bytes: {:?}", attachment_bytes);
         let ver = attachment_bytes[0];
         if ver != UPROTOCOL_MAJOR_VERSION {
             let msg = format!(
